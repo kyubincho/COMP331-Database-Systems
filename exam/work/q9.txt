@@ -1,0 +1,36 @@
+# COMP3311 12s1 Exam Q9
+
+(a)
+create function fixCourseOnAddCourseEnrolment() returns trigger
+as $$
+declare
+    _nS integer; _nE integer; _sum integer; _avg float;
+begin
+    select nS, nE, avgEval into _nS, _nE, _avg
+    from Coures 
+    where id = new.course;
+    _nS := _nS + 1;
+    
+    if (new.stueval is not null) then
+        _nE := _nE + 1;
+        if (_nS <= 10 or (3*_nE) <= _nS) then
+            _avg := null;
+        else 
+            select sum(stuEval) into _sum
+            from CourseEnrolments 
+            where course = new.course
+            _sum := _sum + new.stuEVal;
+            _avg := _sum::float / _nE;
+        end if;
+    end if;
+    update Courses set ns = _nS, nE = _nE, avgEval = _avg
+    where id = new.course;
+end;
+$$
+language plpgsql
+
+(b)
+
+
+(c)
+

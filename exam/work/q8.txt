@@ -1,0 +1,35 @@
+# COMP3311 12s1 Exam Q8
+
+(a)
+create table Employee (
+    id integer,
+    name text,
+    position, text,
+    primary key (id)
+);
+
+create table PartTime (
+    id integer references Employee(id),
+    fraction float,
+    primary key (id)
+);
+
+create table Casual (
+    id integer references Employee(id),
+    primary key (id)
+);
+
+create table HoursWorked (
+    id integer references Casual(id),
+    dayDate date,
+    starting time,
+    ending time,
+    primary key (id, dayDate),
+    constraint timing check (starting < ending)
+);
+
+(b)
+
+
+
+

@@ -1,0 +1,24 @@
+# COMP3311 12s1 Exam Q10
+
+(a)
+The script is attempting to output a table containing columns of
+a player name and the umber of goals they scored. 
+
+(b)
+501 executes, five-hundred and one
+
+(c)
+import sqlite3
+
+conn = sqlite3.connect("footy.db")
+
+query = """
+    select P.id, P.name, count(G.scoredBy)
+    from Players P join Goals on P.id = G.scoredBy
+    group by P.id, P.name;
+"""
+
+c1 = conn.cursor()
+c1.execute(query)
+for id, name, goal in c1.fetchall():
+    print name, goals
